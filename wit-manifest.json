@@ -1,0 +1,29 @@
+[
+    {
+        "commit": "471dfa250b87a16a461f583e2b7eed69293cef02",
+        "name": "soc-testsocket-sifive",
+        "source": "git@github.com:sifive/soc-testsocket-sifive.git"
+    },
+    {
+        "commit": "84d8bb615feb2975d6c4f543726563ca71c4538c",
+        "name": "api-generator-sifive",
+        "source": "git@github.com:sifive/api-generator-sifive.git"
+    },
+    {
+        "commit": "1c38068e5338dce8594f3aef0466c6333f46a24d",
+        "name": "api-scala-sifive",
+        "source": "git@github.com:sifive/api-scala-sifive.git"
+    },
+
+    {
+        "commit": "80aa52b0044691c6778f150da9e7eda6a4627bde",
+        "name": "rocket-chip",
+        "source": "git@github.com:chipsalliance/rocket-chip.git"
+    },
+
+    {
+        "commit": "c1dee8234c23c8fc454108e59ecba20987f95cde",
+        "name": "sifive-blocks",
+        "source": "git@github.com:sifive/sifive-blocks.git"
+    }
+]
