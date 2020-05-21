@@ -1,20 +1,4 @@
 package sifive.blocks.i3cmaster
-/*
-import chisel3._
-// import chisel3.{withClockAndReset, _}
-import chisel3.util._
-import chisel3.experimental._
-import freechips.rocketchip.config._
-import freechips.rocketchip.diplomacy._
-import freechips.rocketchip.diplomaticobjectmodel.{DiplomaticObjectModelAddressing, HasLogicalTreeNode}
-import freechips.rocketchip.diplomaticobjectmodel.logicaltree.{LogicalTreeNode, LogicalModuleTree}
-import freechips.rocketchip.diplomaticobjectmodel.model._
-import freechips.rocketchip.util.{ElaborationArtefacts}
-import freechips.rocketchip.tilelink._
-import freechips.rocketchip.subsystem._
-import freechips.rocketchip.regmapper._
-import sifive.blocks.util._
-*/
 
 
 import chisel3._
@@ -63,9 +47,6 @@ val r1 = RegInit(0.U(2.W))
 
 val r2 = RegInit(0.U(2.W))
 
-//val r3 = RegInit(0.U(2.W))
-
-//val r4 = RegInit(0.U(2.W))
 
 val field = Seq (
 	0x0 -> RegFieldGroup("Register1",Some("First Register"),
@@ -102,7 +83,7 @@ object I3CMaster {
 
  val nextId = { var i = -1; () => { i += 1; i}}
 
- def attach(params : I3CMasterAttachParams): I3CMaster = {
+ def attach(params : I3CMasterAttachParams)(implicit p: Parameter): I3CMaster = {
 	val name = s"i3cmaster_${nextId()}"	
 	val i3cmaster = LazyModule(new I3CMaster(params.i3cmaster.copy(beatBytes = params.controlBus.beatBytes)))
 	i3cmaster.suggestName(name)
@@ -113,5 +94,3 @@ object I3CMaster {
 
 }
 }
-
-//(implicit p: Parameter)
