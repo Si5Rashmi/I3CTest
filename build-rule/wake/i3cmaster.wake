@@ -1,4 +1,3 @@
-
 def workspaceroot = "{here}/../../"
 def package = "sifive.blocks.i3cmaster"
 

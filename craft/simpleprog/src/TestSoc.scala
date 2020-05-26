@@ -19,15 +19,15 @@ import freechips.rocketchip.diplomaticobjectmodel.logicaltree._
 import sifive.skeleton._
 
 class I3CMasterConfig0 extends Config((site,here,up) => {
- case I3CMasterKey => I3CMasterParams(
+ case I3CMasterKey => Seq(I3CMasterParams(
  
 	address		= 0x10000000
-)
+))
 }) 
 
 
 
-class TestSocDUT(harness: LazyScope)(implicit p: Parameters) extends SkeletonDUT(harness)
+class TestSocDUT(harness: LazyScope)(implicit p: Parameters) extends SkeletonDUT(harness) with Attachable
 {
   val I3CMasterParams = p(I3CMasterKey)(0)
   val i3cmaster = LazyModule(new I3CMaster(I3CMasterParams)) 
@@ -40,6 +40,6 @@ class TestSocHarness()(implicit p: Parameters) extends LazyModule with LazyScope
   val dut = LazyModule(new TestSocDUT(this))
   lazy val module = new LazyModuleImp(this) {
     ConstructOM.constructOM()
- //   Debug.tieoffDebug(dut.module.debug)
+    Debug.tieoffDebug(dut.module.debug)
   }
 }

@@ -6,6 +6,7 @@ import chisel3.util._
 import freechips.rocketchip.config._
 import freechips.rocketchip.diplomacy._
 import freechips.rocketchip.diplomaticobjectmodel._
+//import freechips.rocketchip.diplomaticobjectmodel.model.{OMDevice,OMMemoryRegion,OMComponent,OMRegister}
 import freechips.rocketchip.diplomaticobjectmodel.model._
 import freechips.rocketchip.diplomaticobjectmodel.logicaltree._
 import freechips.rocketchip.regmapper._
@@ -25,7 +26,8 @@ case class I3CMasterParams(
 case class OMI3CMasterParams(
 	i3cmaster: I3CMasterParams,
 	memoryRegions: Seq[OMMemoryRegion],
-	_types: Seq[String] = Seq("OMI3CMaster","OMDevice","OMComponent","OMCompundType") 
+	interrupts : Seq[OMInterrupt],
+	_types: Seq[String] = Seq("OMI3CMaster","OMDevice","OMComponent","OMCompoundType") 
 )extends OMDevice
 
 class I3CMaster(params: I3CMasterParams)(implicit p: Parameters) extends LazyModule
@@ -67,7 +69,8 @@ controlNode.regmap(field : _*)
     def getOMComponents(resourceBindings: ResourceBindings, children: Seq[OMComponent] = Nil): Seq[OMComponent] = {
       val compname = device.describe(resourceBindings).name
       val regions = DiplomaticObjectModelAddressing.getOMMemoryRegions(compname, resourceBindings, Some(OMRegister.convert(module.field: _*)))
-      Seq(OMI3CMasterParams(i3cmaster = params, memoryRegions = regions))
+      val intr = DiplomaticObjectModelAddressing.describeGlobalInterrupts(compname, resourceBindings)
+	Seq(OMI3CMasterParams(i3cmaster = params, memoryRegions = regions,interrupts = intr))
     }
   }
 
@@ -83,7 +86,7 @@ object I3CMaster {
 
  val nextId = { var i = -1; () => { i += 1; i}}
 
- def attach(params : I3CMasterAttachParams)(implicit p: Parameter): I3CMaster = {
+ def attach(params : I3CMasterAttachParams)(implicit p: Parameters): I3CMaster = {
 	val name = s"i3cmaster_${nextId()}"	
 	val i3cmaster = LazyModule(new I3CMaster(params.i3cmaster.copy(beatBytes = params.controlBus.beatBytes)))
 	i3cmaster.suggestName(name)
