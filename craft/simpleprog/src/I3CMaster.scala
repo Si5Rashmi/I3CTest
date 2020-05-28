@@ -6,7 +6,7 @@ import chisel3.util._
 import freechips.rocketchip.config._
 import freechips.rocketchip.diplomacy._
 import freechips.rocketchip.diplomaticobjectmodel._
-//import freechips.rocketchip.diplomaticobjectmodel.model.{OMDevice,OMMemoryRegion,OMComponent,OMRegister}
+import freechips.rocketchip.diplomaticobjectmodel.model.{OMDevice,OMMemoryRegion,OMComponent,OMRegister}
 import freechips.rocketchip.diplomaticobjectmodel.model._
 import freechips.rocketchip.diplomaticobjectmodel.logicaltree._
 import freechips.rocketchip.regmapper._
@@ -36,7 +36,7 @@ class I3CMaster(params: I3CMasterParams)(implicit p: Parameters) extends LazyMod
   val device = new SimpleDevice("i3cmaster", Seq("sifive,i3cmaster0")) 
 
   val controlNode = TLRegisterNode(
-		address = Seq(AddressSet(params.address, 0xfff)),
+		address = Seq(AddressSet(params.address, 0xffff)),
 		device = device,
 		beatBytes = params.beatBytes)
 
@@ -92,8 +92,10 @@ object I3CMaster {
 	i3cmaster.suggestName(name)
 
 
- params.controlBus.coupleTo(name) { i3cmaster.controlNode := TLWidthWidget(params.controlBus):= _ }
- i3cmaster
+//params.controlBus.coupleTo(name) { i3cmaster.controlNode := TLFragmenter(params.controlBus) :=  TLWidthWidget(params.controlBus) := _ }
+ 
+ 	 params.controlBus.coupleTo(name) { i3cmaster.controlNode := TLWidthWidget(params.controlBus):= _ }
+	i3cmaster
 
 }
 }
