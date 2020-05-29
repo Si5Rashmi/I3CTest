@@ -45,22 +45,18 @@ lazy val module = new LazyModuleImp(this){
 
 
 
-val r1 = RegInit(0.U(2.W))
+val r1 = RegInit(0.U(32.W))
 
-val r2 = RegInit(0.U(2.W))
+val r2 = RegInit(0.U(32.W))
 
 
 val field = Seq (
 	0x0 -> RegFieldGroup("Register1",Some("First Register"),
-	Seq(RegField(2,r1),
-	RegField(30))),
+	Seq(RegField(32,r1))),
 
 	0x4 -> RegFieldGroup("Register2",Some("Second Register"),
-	Seq(RegField(2,r2),
-	RegField(30)))
-
+	Seq(RegField(32,r2)))
 )
-
 
 controlNode.regmap(field : _*)
 }
