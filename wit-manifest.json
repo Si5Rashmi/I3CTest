@@ -5,7 +5,7 @@
         "source": "git@github.com:sifive/soc-testsocket-sifive.git"
     },
     {
-        "commit": "84d8bb615feb2975d6c4f543726563ca71c4538c",
+        "commit": "63dd9ba8cb2d24d9b07b6c6ce10e89d6f3a28902",
         "name": "api-generator-sifive",
         "source": "git@github.com:sifive/api-generator-sifive.git"
     },
@@ -25,5 +25,17 @@
         "commit": "c1dee8234c23c8fc454108e59ecba20987f95cde",
         "name": "sifive-blocks",
         "source": "git@github.com:sifive/sifive-blocks.git"
+    },
+
+    {
+        "commit": "d8c80094af1d11af74076fbdec3bd00b402071fc",
+        "name": "freedom-metal",
+        "source": "git@github.com:sifive/freedom-metal.git"
+    },
+
+    {
+	"commit": "d96b0a2f9dc40c2e5468aec3f21a31c42946d6e6",
+        "name": "freedom-devicetree-tools",
+        "source": "git@github.com:sifive/freedom-devicetree-tools.git"
     }
 ]
