@@ -61,7 +61,7 @@ def i3cmasterConfig0Test =
   def plusargs =
     NamedArg        "verbose",
     NamedArgInteger "random_seed"      1234,
-    NamedArgInteger "tilelink_timeout" 5000000,
-    NamedArgInteger "max-cycles"       5000000,
+    NamedArgInteger "tilelink_timeout" 900000,
+    NamedArgInteger "max-cycles"       900000,
     Nil
   makeBlockTest name block program plusargs
